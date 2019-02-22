@@ -29,7 +29,8 @@ class ManzaraAdapter(tumManzaralar : ArrayList<Manzara>) : RecyclerView.Adapter<
         holder.setData(manzaralar.get(position),position)
     }
 
-    class ManzaraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    //setOnClickListener dan 'manzaralar' ArrayListine erişmek için inner class yapıyoruz
+    inner class ManzaraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tekSatirManzara = itemView as CardView
         var manzaraBaslik =  tekSatirManzara.tvManzaraBaslik
         var manzaraAciklama = tekSatirManzara.tvManzaraAciklama
@@ -44,10 +45,18 @@ class ManzaraAdapter(tumManzaralar : ArrayList<Manzara>) : RecyclerView.Adapter<
             manzaraResim.setImageResource(manzara.resim)
 
             btnCopy.setOnClickListener {
-
+                manzaralar.add(position,manzara)
+                //RecyclerView a posisyondaki elemanı ekleme
+                notifyItemInserted(position)
+                //indexleri Güncelleme
+                notifyItemChanged(position,manzaralar.size)
             }
             btnTrash.setOnClickListener {
-
+                manzaralar.removeAt(position)
+                //RecyclerView dan posisyondaki elemanı silme
+                notifyItemRemoved(position)
+                //indexleri Güncelleme
+                notifyItemChanged(position,manzaralar.size)
             }
 
 
