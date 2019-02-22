@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.tek_satir.view.*
 class ManzaraAdapter(tumManzaralar : ArrayList<Manzara>) : RecyclerView.Adapter<ManzaraAdapter.ManzaraViewHolder>() {
 
     var manzaralar = tumManzaralar
+
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ManzaraViewHolder {
         //tek_satir.xml dosyasını java sınıfına dönüştüreceğiz.Ardından ViewHolder oluşturup geri döndüreceğiz
         var inflater = LayoutInflater.from(parent.context)
@@ -25,10 +26,7 @@ class ManzaraAdapter(tumManzaralar : ArrayList<Manzara>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ManzaraViewHolder, position: Int) {
-        //holderı listeye atayacağız
-        holder.manzaraBaslik.text = manzaralar[position].baslik
-        holder.manzaraAciklama.text = manzaralar[position].aciklama
-        holder.manzaraResim.setImageResource(manzaralar[position].resim)
+        holder.setData(manzaralar.get(position),position)
     }
 
     class ManzaraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,5 +34,24 @@ class ManzaraAdapter(tumManzaralar : ArrayList<Manzara>) : RecyclerView.Adapter<
         var manzaraBaslik =  tekSatirManzara.tvManzaraBaslik
         var manzaraAciklama = tekSatirManzara.tvManzaraAciklama
         var manzaraResim = tekSatirManzara.imgManzara
+        var btnCopy = tekSatirManzara.imgCopy
+        var btnTrash = tekSatirManzara.imgTrash
+
+        fun setData(manzara : Manzara ,position:Int){
+            //holderı listeye atayacağız
+            manzaraBaslik.text = manzara.baslik
+            manzaraAciklama.text = manzara.aciklama
+            manzaraResim.setImageResource(manzara.resim)
+
+            btnCopy.setOnClickListener {
+
+            }
+            btnTrash.setOnClickListener {
+
+            }
+
+
+
+        }
     }
 }
